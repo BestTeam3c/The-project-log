@@ -1,3 +1,0 @@
-# xrBates
-# Alan
-# Alan
