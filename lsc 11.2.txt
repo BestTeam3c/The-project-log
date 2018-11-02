@@ -1,0 +1,29 @@
+    我今天上午我熟悉了一些皮尔逊相关系数有联系的一些数学知识，这些点很容易混淆，我在这里做个记录。
+
+均值（平均值，期望值） 
+标准差（均方差）：可对一维数据描述的则是样本集合的各个样本点到均值的距离之平均
+方差：可对一维数据分析与均值偏离程度
+协方差：协方差就是这样一种用来度量两个随机（二维数据）变量关系的统计量
+协方差矩阵:协方差矩阵就是这样一种用来度量多个随机（n维数据）变量关系的统计量
+
+下午对推荐系统的数据预处理解读，
+这里部分代码里有我做的详细注释
+
+	user_title = ['UserID','Gender','Age','JobID','Zip-code']
+	#从限定分隔符的文本文件导入数据
+	users = pd.read_table('./ml-1m/users.dat', sep='::', header=None,
+		names=user_title, engine='python')
+	#按正则表达式选择列(过滤掉了“zip-code”)
+	users = users.filter(regex='UserID|Gender|Age|JobID')
+	users_orig = users.values #a list
+	#性别转成数字
+	gender_to_int = {'F':0,'M':1}
+	#把所有的gender通过map函数变成0，1
+	users['Gender'] = users['Gender'].map(gender_to_int)
+	#把年龄放入无序去重集合并用enumerate函数加上下标
+	age2int = {val:ii for ii, val in enumerate(set(users['Age']))}
+	#对所有的age进行分类
+	users['Age'] = users['Age'].map(age2int)
+
+
+
