@@ -1,0 +1,17 @@
+今天的学习只要是理解代码，我就说说今天遇到比较难的函数：
+
+gender_to_int = {'F':0,'M':1}	
+users['Gender'] = users['Gender'].map(gender_to_int)
+通过map函数从gender_to_int中的key找users['Gender']相同值后，用value替换users['Gender']的值。
+
+
+pattern = re.compile(r'^(.*)\((\d+)\)$')
+"^"：匹配字符串的开头、"(.*)"：代表匹配除换行符之外的所有字符、"\(":匹配左括号字符 、"(\d+)"：用于匹配至少一个数字、"\）":匹配右括号字符 、"$":匹配字符串的末尾。
+
+title_re_year = {val:pattern.match(val).group(1) for val in set(movies['Title'])}
+把每一个电影名放入集合去重（不同用户会看同样的电影）遍历把电影名通过正则去掉年份作为字典value值，把原电影名作为字典key值。
+
+
+movie_id_embed_layer = tf.nn.embedding_lookup(
+movie_id_embed_matrix, movie_id, name='movie_id_embed_layer')
+根据movie_id中的各值在movie_id_embed_matrix找到对应行的值 返回tensor
